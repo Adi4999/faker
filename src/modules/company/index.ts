@@ -44,7 +44,7 @@ export class Company {
       format = this.faker.datatype.number(formats.length - 1);
     }
 
-    return this.faker.fake(formats[format]);
+    return this.faker.helpers.fake(formats[format]);
   }
 
   /**
@@ -64,9 +64,11 @@ export class Company {
    * faker.company.catchPhrase() // 'Upgradable systematic flexibility'
    */
   catchPhrase(): string {
-    return this.faker.fake(
-      '{{company.catchPhraseAdjective}} {{company.catchPhraseDescriptor}} {{company.catchPhraseNoun}}'
-    );
+    return [
+      this.catchPhraseAdjective(),
+      this.catchPhraseDescriptor(),
+      this.catchPhraseNoun(),
+    ].join(' ');
   }
 
   /**
@@ -76,9 +78,7 @@ export class Company {
    * faker.company.bs() // 'cultivate synergistic e-markets'
    */
   bs(): string {
-    return this.faker.fake(
-      '{{company.bsBuzz}} {{company.bsAdjective}} {{company.bsNoun}}'
-    );
+    return [this.bsBuzz(), this.bsAdjective(), this.bsNoun()].join(' ');
   }
 
   /**
